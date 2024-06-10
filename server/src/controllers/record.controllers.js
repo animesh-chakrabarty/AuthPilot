@@ -1,12 +1,12 @@
 const fetchRecords = (req, res) => {
-  res.json({
+  res.status(200).json({
     msg: "app working!!!",
   });
 };
 
 const addRecord = (req, res) => {
   const data = req.body;
-  res.status(400).json({
+  res.status(200).json({
     msg: {
       data,
     },

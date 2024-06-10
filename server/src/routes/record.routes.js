@@ -7,6 +7,6 @@ const {
 const router = express.Router();
 
 router.get("/:userId/:date", fetchRecords);
-router.post(":/userId/:date", addRecord);
+router.post("/:userId/:date", addRecord);
 
 module.exports = router;
