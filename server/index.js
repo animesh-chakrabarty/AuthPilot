@@ -1,7 +1,9 @@
 const express = require("express");
 const connectDB = require("./src/db");
-const router = require("./src/routes/record.routes");
 require("dotenv").config();
+
+const userRouter = require("./src/routes/user.routes");
+const transactionRouter = require("./src/routes/transaction.routes");
 
 const PORT = process.env.PORT || 4000;
 
@@ -13,7 +15,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/records", router);
+app.use("/api", userRouter);
+app.use("/api/transactions/:userId", transactionRouter);
 
 // connect mongoDB
 connectDB()
