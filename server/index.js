@@ -4,19 +4,18 @@ require("dotenv").config();
 
 const userRouter = require("./src/routes/user.routes");
 const transactionRouter = require("./src/routes/transaction.routes");
+const logRequest = require("./src/middlewares/log");
+const addUserIdToReq = require("./src/middlewares/addUserIdToReq");
 
 const PORT = process.env.PORT || 4000;
 
 const app = express();
 
+app.use(logRequest);
 app.use(express.json());
-app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
 
-app.use("/api", userRouter);
-app.use("/api/transactions/:userId", transactionRouter);
+app.use("/api/users", userRouter);
+app.use("/api/users/:userId/transactions",addUserIdToReq, transactionRouter);
 
 // connect mongoDB
 connectDB()

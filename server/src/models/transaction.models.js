@@ -1,8 +1,26 @@
 const mongoose = require("mongoose");
 
+const dateSchema = new mongoose.Schema({
+  day: {
+    type: String,
+    required: true,
+  },
+  month: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: String,
+    required: true,
+  },
+});
 const transactionSchema = new mongoose.Schema({
   userId: {
     type: String,
+    required: true,
+  },
+  date: {
+    type: dateSchema,
     required: true,
   },
   amount: {

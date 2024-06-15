@@ -10,11 +10,11 @@ const {
 
 const router = express.Router();
 
-router.get("/:date", fetchTransactionsByDate);
-router.post("/:date", addTransaction);
-router.get("/:month", fetchTransactionsByMonth);
+router.get("/date/:date", fetchTransactionsByDate);
+router.post("/date/:date", addTransaction);
+router.get("/month/:month", fetchTransactionsByMonth);
 router.delete("/:transactionId", deleteTransactionById);
-router.get("/recent", fetchRecentTransactions);
 router.patch("/:transactionId", updateTransactionById);
+router.get("/recent", fetchRecentTransactions);
 
 module.exports = router;
