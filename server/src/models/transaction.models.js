@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dateSchema = new mongoose.Schema({
+const timeStampSchema = new mongoose.Schema({
   day: {
     type: String,
     required: true,
@@ -13,14 +13,18 @@ const dateSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  time: {
+    type: String,
+    required: true,
+  },
 });
 const transactionSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true,
   },
-  date: {
-    type: dateSchema,
+  timeStamp: {
+    type: timeStampSchema,
     required: true,
   },
   amount: {

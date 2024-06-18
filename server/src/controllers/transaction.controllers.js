@@ -1,4 +1,28 @@
+const moment = require("moment");
 const TransactionModel = require("../models/transaction.models");
+
+// add transaction - POST - /
+const addTransaction = async (req, res) => {
+  const currentTime = moment();
+  const { userId } = req;
+  // preprocessing of time
+  const formattedTime = currentTime.format(
+    `${currentTime.hour()}:${currentTime.minute()}:${currentTime.second()}`
+  );
+
+  const timeStamp_obj = {
+    day: currentTime.format("DD"),
+    month: currentTime.format("MM"),
+    year: currentTime.format("YYYY"),
+    time: formattedTime,
+  };
+
+  req.body.timeStamp = timeStamp_obj;
+  req.body.userId = userId;
+  const data = req.body;
+  const trasactionDetails = await TransactionModel.create(data);
+  res.status(200).json(trasactionDetails);
+};
 
 // fetch transactions by date - GET - date/:date
 const fetchTransactionsByDate = async (req, res) => {
@@ -14,9 +38,9 @@ const fetchTransactionsByDate = async (req, res) => {
   try {
     const listOfTransactions = await TransactionModel.find({
       userId,
-      "date.day": date_obj.day,
-      "date.month": date_obj.month,
-      "date.year": date_obj.year,
+      "timeStamp.day": date_obj.day,
+      "timeStamp.month": date_obj.month,
+      "timeStamp.year": date_obj.year,
     });
     // if user have no transactions
     if (!listOfTransactions.length) {
@@ -28,25 +52,6 @@ const fetchTransactionsByDate = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "error retriving transactions", error });
   }
-};
-
-// add transaction - POST - date/:date
-const addTransaction = async (req, res) => {
-  const { date } = req.params;
-  const { userId } = req;
-  // preprocessing of date
-  const [day, month, year] = date.split("-");
-  const date_obj = {
-    day,
-    month,
-    year,
-  };
-
-  req.body.date = date_obj;
-  req.body.userId = userId;
-  const data = req.body;
-  const trasactionDetails = await TransactionModel.create(data);
-  res.status(200).json(trasactionDetails);
 };
 
 // fetch transaction by month - GET  - month/:month
@@ -62,8 +67,8 @@ const fetchTransactionsByMonth = async (req, res) => {
   try {
     const listOfTransactionsByMonth = await TransactionModel.find({
       userId,
-      "date.month": month_obj.month,
-      "date.year": month_obj.year,
+      "timeStamp.month": month_obj.month,
+      "timeStamp.year": month_obj.year,
     });
 
     if (!listOfTransactionsByMonth.length) {

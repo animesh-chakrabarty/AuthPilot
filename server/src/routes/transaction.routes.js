@@ -10,8 +10,8 @@ const {
 
 const router = express.Router();
 
+router.post("/", addTransaction);
 router.get("/date/:date", fetchTransactionsByDate);
-router.post("/date/:date", addTransaction);
 router.get("/month/:month", fetchTransactionsByMonth);
 router.get("/recent", fetchRecentTransactions);
 router.delete("/:transactionId", deleteTransactionById);
