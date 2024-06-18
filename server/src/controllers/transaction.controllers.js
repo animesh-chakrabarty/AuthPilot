@@ -20,8 +20,12 @@ const addTransaction = async (req, res) => {
   req.body.timeStamp = timeStamp_obj;
   req.body.userId = userId;
   const data = req.body;
-  const trasactionDetails = await TransactionModel.create(data);
-  res.status(200).json(trasactionDetails);
+  try {
+    const trasactionDetails = await TransactionModel.create(data);
+    res.status(200).json(trasactionDetails);
+  } catch (error) {
+    res.status(500).json({ message: "Error adding transaction", error });
+  }
 };
 
 // fetch transactions by date - GET - date/:date
@@ -82,9 +86,47 @@ const fetchTransactionsByMonth = async (req, res) => {
   }
 };
 
-const deleteTransactionById = async () => {};
+// delete transaction by id - DEL - /:transactionId
+const deleteTransactionById = async (req, res) => {
+  const { transactionId } = req.params;
+
+  try {
+    const deletedTransaction = await TransactionModel.findByIdAndDelete(
+      transactionId
+    );
+
+    res.status(200).json({
+      message: "Transaction deleted successfully",
+      deletedTransaction,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error in deleting transaction", error });
+  }
+};
+
+// update transaction by id - PATCH - /:transactionId
+const updateTransactionById = async (req, res) => {
+  const { transactionId } = req.params;
+  const data = req.body;
+  try {
+    const updatedTransaction = await TransactionModel.findByIdAndUpdate(
+      transactionId,
+      data,
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Transaction updated successfully",
+      updatedTransaction,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error while updating transaction", error });
+  }
+};
+
 const fetchRecentTransactions = async () => {};
-const updateTransactionById = async () => {};
 
 module.exports = {
   fetchTransactionsByDate,
