@@ -126,7 +126,23 @@ const updateTransactionById = async (req, res) => {
   }
 };
 
-const fetchRecentTransactions = async () => {};
+// fetch recent transactions - /recent
+const fetchRecentTransactions = async (req, res) => {
+  const { userId } = req;
+
+  try {
+    const recentTransactions = await TransactionModel.find({ userId }).sort({
+      "timeStamp.year": -1,
+      "timeStamp.month": -1,
+      "timeStamp.day": -1,
+      "timeStamp.time": -1,
+    });
+
+    res.status(200).json({ recentTransactions });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 module.exports = {
   fetchTransactionsByDate,

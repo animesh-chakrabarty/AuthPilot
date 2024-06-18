@@ -157,3 +157,9 @@ REQ Method: PATCH || REQ path: /api/users/1000/transactions/667157c66058d89ce787
 REQ Method: GET || REQ path: /api/users/1000/transactions/date/18-06-2024 || REQ IP : ::1
 REQ Method: PATCH || REQ path: /api/users/1000/transactions/667157c66058d89ce78745ef || REQ IP : ::1
 REQ Method: GET || REQ path: /api/users/1000/transactions/date/18-06-2024 || REQ IP : ::1
+REQ Method: GET || REQ path: /api/users/1000/transactions/recent || REQ IP : ::1
+REQ Method: GET || REQ path: /api/users/1000/transactions/recent || REQ IP : ::1
+REQ Method: GET || REQ path: /api/users/1000/transactions/recent || REQ IP : ::1
+REQ Method: GET || REQ path: /api/users/1000/transactions/recent || REQ IP : ::1
+REQ Method: GET || REQ path: /api/users/1000/transactions/date/18-06-2024 || REQ IP : ::1
+REQ Method: GET || REQ path: /api/users/1000/transactions/recent || REQ IP : ::1
