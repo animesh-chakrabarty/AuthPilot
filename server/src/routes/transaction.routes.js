@@ -13,8 +13,8 @@ const router = express.Router();
 router.get("/date/:date", fetchTransactionsByDate);
 router.post("/date/:date", addTransaction);
 router.get("/month/:month", fetchTransactionsByMonth);
+router.get("/recent", fetchRecentTransactions);
 router.delete("/:transactionId", deleteTransactionById);
 router.patch("/:transactionId", updateTransactionById);
-router.get("/recent", fetchRecentTransactions);
 
 module.exports = router;

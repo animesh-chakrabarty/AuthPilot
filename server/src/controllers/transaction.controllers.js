@@ -12,15 +12,19 @@ const fetchTransactionsByDate = async (req, res) => {
     year,
   };
   try {
-    const transactions = await TransactionModel.find({
+    const listOfTransactions = await TransactionModel.find({
       userId,
-      date: date_obj,
+      "date.day": date_obj.day,
+      "date.month": date_obj.month,
+      "date.year": date_obj.year,
     });
     // if user have no transactions
-    if (!transactions.length) {
-      return res.status(200).json({ message: "User have no transactions" });
+    if (!listOfTransactions.length) {
+      return res.status(200).json({
+        message: `User has no transaction on ${date_obj.day}/${date_obj.month}/${date_obj.year}`,
+      });
     }
-    res.status(200).json(transactions);
+    res.status(200).json(listOfTransactions);
   } catch (error) {
     res.status(500).json({ message: "error retriving transactions", error });
   }
@@ -38,7 +42,6 @@ const addTransaction = async (req, res) => {
     year,
   };
 
-  console.log(date_obj);
   req.body.date = date_obj;
   req.body.userId = userId;
   const data = req.body;
@@ -57,20 +60,23 @@ const fetchTransactionsByMonth = async (req, res) => {
   };
 
   try {
-    const transactionsByMonth = await TransactionModel.find({
-      date: {
-        $elemMatch: {
-          month: month_obj.month,
-          year: month_obj.year,
-        },
-      },
+    const listOfTransactionsByMonth = await TransactionModel.find({
+      userId,
+      "date.month": month_obj.month,
+      "date.year": month_obj.year,
     });
 
-    res.status(200).json(transactionsByMonth);
+    if (!listOfTransactionsByMonth.length) {
+      return res.status(200).json({
+        msg: `User has no transaction on month ${month_obj.month}/${month_obj.year}`,
+      });
+    }
+    res.status(200).json(listOfTransactionsByMonth);
   } catch (err) {
     res.status(500).json({ message: "Error retrieving transactions", err });
   }
 };
+
 const deleteTransactionById = async () => {};
 const fetchRecentTransactions = async () => {};
 const updateTransactionById = async () => {};
