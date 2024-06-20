@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const hashContent = require("../utils/hashContent");
+const verifyHashedContent = require("../utils/verifyHashedContent");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -46,6 +47,32 @@ userSchema.statics.signupUser = async function (email, password, name) {
   } catch (error) {
     console.log("DB error: ", error);
     throw new Error("Error while adding new user credentials to DB");
+  }
+};
+
+userSchema.statics.loginUser = async function (email, password) {
+  // 1. check if all the fields are present
+  if (!email || !password) {
+    throw new Error("All fields are mandatory");
+  }
+  // 2. check if email is valid
+  if (!validator.isEmail(email)) {
+    throw new Error("Email is not valid");
+  }
+  // find doc by email and match password & return doc
+  try {
+    const user = await this.findOne({ email });
+    if (!user) {
+      throw new Error("user doesn't exist");
+    }
+    const doesPassMatch = await verifyHashedContent(password, user.password);
+    if (!doesPassMatch) {
+      throw new Error("password is incorrect");
+    }
+    return user;
+  } catch (error) {
+    console.log("DB Error: ", error.message);
+    throw new Error(error.message);
   }
 };
 
