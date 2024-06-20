@@ -255,3 +255,9 @@ REQ Method: GET || REQ path: /api/users/transactions/date/20-06-2024 || REQ IP :
 REQ Method: GET || REQ path: /api/users/transactions/date/20-06-2024 || REQ IP : ::1
 REQ Method: GET || REQ path: /api/users/transactions/date/20-06-2024 || REQ IP : ::1
 REQ Method: GET || REQ path: /api/users/transactions/date/20-06-2024 || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
