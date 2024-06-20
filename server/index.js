@@ -5,7 +5,7 @@ require("dotenv").config();
 const userRouter = require("./src/routes/user.routes");
 const transactionRouter = require("./src/routes/transaction.routes");
 const logRequest = require("./src/middlewares/log");
-const addUserIdToReq = require("./src/middlewares/addUserIdToReq");
+const requireAuth = require("./src/middlewares/requireAuth");
 
 const PORT = process.env.PORT || 4000;
 
@@ -15,7 +15,7 @@ app.use(logRequest);
 app.use(express.json());
 
 app.use("/api/users", userRouter);
-app.use("/api/users/:userId/transactions",addUserIdToReq, transactionRouter);
+app.use("/api/users/transactions", requireAuth, transactionRouter);
 
 // connect mongoDB
 connectDB()
