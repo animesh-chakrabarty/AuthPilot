@@ -261,3 +261,15 @@ REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
 REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
 REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
 REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/users/user-signup || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1
+REQ Method: POST || REQ path: /api/verify || REQ IP : ::1

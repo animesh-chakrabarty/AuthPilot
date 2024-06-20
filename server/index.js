@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const userRouter = require("./src/routes/user.routes");
 const transactionRouter = require("./src/routes/transaction.routes");
+const verifyUserRouter = require("./src/routes/verifyUser.routes");
 const logRequest = require("./src/middlewares/log");
 const requireAuth = require("./src/middlewares/requireAuth");
 
@@ -15,6 +16,7 @@ app.use(logRequest);
 app.use(express.json());
 
 app.use("/api/users", userRouter);
+app.use("/api/verify", requireAuth, verifyUserRouter);
 app.use("/api/users/transactions", requireAuth, transactionRouter);
 
 // connect mongoDB

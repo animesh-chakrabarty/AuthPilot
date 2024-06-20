@@ -19,10 +19,8 @@ const handleUserSignup = async (req, res) => {
       userId: user._id,
       expiresIn: "24H",
     });
-    console.log(OTPDetails);
     // send mail
     const info = await sendMail(email, OTP);
-    console.log(info);
     res.status(200).json({
       email,
       token,
