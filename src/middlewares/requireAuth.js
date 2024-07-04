@@ -10,7 +10,7 @@ const requireAuth = async (req, res, next) => {
   const token = authorization.split(" ")[1];
   try {
     // verify token - extract userId from payload
-    const { id } = verifyJWT(token);
+    const { payload: id } = verifyJWT(token);
     // find the user details from DB using userId
     const { _id } = await UserModel.findOne({ _id: id }).select("_id");
     // attach userId to req
@@ -18,7 +18,6 @@ const requireAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(error.message);
     res.status(400).json({ Error: error.message });
   }
 };

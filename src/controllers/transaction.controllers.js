@@ -5,21 +5,20 @@ const TransactionModel = require("../models/transaction.models");
 const addTransaction = async (req, res) => {
   const currentTime = moment();
   const { userId } = req;
-  // preprocessing of time
-  const formattedTime = currentTime.format(
-    `${currentTime.hour()}:${currentTime.minute()}:${currentTime.second()}`
-  );
 
+  // preprocessing of timestamp object
   const timeStamp_obj = {
     day: currentTime.format("DD"),
     month: currentTime.format("MM"),
     year: currentTime.format("YYYY"),
-    time: formattedTime,
+    time: currentTime.format("HH:mm:ss"),
   };
 
   req.body.timeStamp = timeStamp_obj;
   req.body.userId = userId;
+
   const data = req.body;
+
   try {
     const trasactionDetails = await TransactionModel.create(data);
     res.status(200).json(trasactionDetails);
