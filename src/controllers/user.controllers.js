@@ -43,7 +43,7 @@ const handleUserLogin = async (req, res) => {
     res.status(200).json({ email, token });
   } catch (error) {
     console.log(error.message);
-    res.status(400).json(error.message);
+    res.status(400).json({ Error: error.message });
   }
 };
 

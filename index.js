@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./src/db");
 require("dotenv").config();
+const cors = require("cors")
 
 const userRouter = require("./src/routes/user.routes");
 const transactionRouter = require("./src/routes/transaction.routes");
@@ -10,8 +11,9 @@ const requireAuth = require("./src/middlewares/requireAuth");
 
 const PORT = process.env.PORT || 4000;
 
-const app = express();
+const app = express(cors());
 
+app.use(cors());
 app.use(logRequest);
 app.use(express.json());
 

@@ -9,7 +9,7 @@ const verifyUser = async (req, res) => {
     const isVerified = await verifyOTP(OTP, userId);
 
     if (!isVerified) {
-      return res.status(400).json({ message: "OTP is incorrect" });
+      return res.status(400).json({ Error: "OTP is incorrect" });
     }
 
     // delete OTP data from DB
